@@ -1,4 +1,21 @@
+### 2012-1-11 making
+# Code Golf での入出力チェックを用意に行うための自作スクリプトです。
+# 出力チェック以外は anarchy golf(http://golf.shinh.org/) に最適化されています。
+#
+### usage
 usage: 
-	$ golf make URL
+	$ golf make|m URL
 		-- URLからディレクトリの作成、input/outputファイルの作成を行います。
 
+	$ golf 1|2|3
+		-- n番目のinputを実行し、出力をチェックします。
+
+	$ golf 数字o
+		-- n番目のinputを実行し、出力します。
+
+	$ golf all
+		-- 1-3の3つとも実行し、出力をチェックします。
+
+### alias
+# .shrc に以下を追加して使います。
+# alias 'perl DIR/golf_check_script.pl'  
