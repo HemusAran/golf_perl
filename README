@@ -1,0 +1,4 @@
+usage: 
+	$ golf make URL
+		-- URLからディレクトリの作成、input/outputファイルの作成を行います。
+
