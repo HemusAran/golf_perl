@@ -155,6 +155,11 @@ sub section {
 	my $diff_count = 0;
 	my @output = split("\n", $golf_output);
 
+	# 出力が無い場合にダミーデータ挿入
+	if (scalar(@output) == 0) {
+		$output[0] = "";
+	}
+
 	{
 		open(FILE, "<:utf8", "$OUTPUT_TEXT$num.txt") or die $!;
 		my @answer = <FILE>;
