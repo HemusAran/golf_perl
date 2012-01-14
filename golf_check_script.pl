@@ -76,6 +76,8 @@ sub make {
 	my $ua = LWP::UserAgent->new('agent' => $user_agent);
 	my $res = $ua->get($url);
 	my $content = $res->content;
+	$content =~ s/\r\n/\n/g;
+	$content =~ s/\r/\n/g;
 
 	&make_io_text(0, $content);
 	&make_io_text(1, $content);
@@ -160,6 +162,7 @@ sub section {
 		$output[0] = "";
 	}
 
+	# 一致してない行は出力
 	{
 		open(FILE, "<:utf8", "$OUTPUT_TEXT$num.txt") or die $!;
 		my @answer = <FILE>;
