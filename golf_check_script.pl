@@ -41,7 +41,7 @@ sub main {
 	}
 
 	# all実行
-	if ($ARGV[0] eq 'all') {
+	if ($ARGV[0] eq 'all' || $ARGV[0] eq 'a') {
 		&all_section();
 		return;
 	}
@@ -170,6 +170,20 @@ sub section {
 		close(FILE);
 
 		my $length = scalar(@output);
+		{
+			# 配列の数を揃える
+			my $len_ans= scalar(@answer);
+			if ($length != $len_ans) {
+				if ($length > $len_ans) {
+					push(@answer,"") for 1..$length-$len_ans;
+				}
+				if ($length < $len_ans) {
+					push(@output,"") for 1..$len_ans-$length;
+				}
+			}
+		}
+		$length = scalar(@output);
+
 		for (my $i=1; $i<=$length; $i++) {
 			if ($output[$i-1] ne $answer[$i-1]) {
 				print "$i-----\n$output[$i-1]\n$answer[$i-1]\n";
