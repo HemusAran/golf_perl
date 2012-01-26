@@ -79,6 +79,24 @@ sub make {
 	$content =~ s/\r\n/\n/g;
 	$content =~ s/\r/\n/g;
 
+	# problem 作成
+	{
+		my $start_str = "<h2>Problem</h2>\n<p>";
+		my $end_str = '</p>';
+		my $file = 'problem';
+
+		my $s_index = index($content, $start_str, 0) + length$start_str;
+		my $e_index = index($content, $end_str, $s_index);
+		my $text = substr($content, $s_index, $e_index-$s_index);
+		$text =~ s/<br>/\n/g;
+		$text .= "\n\n# $url";
+
+		my $file_name = "$file.txt";
+		open(FILE, ">$file_name") or die $!;
+		print FILE $text;
+		close(FILE);
+	}
+	
 	&make_io_text(0, $content);
 	&make_io_text(1, $content);
 
