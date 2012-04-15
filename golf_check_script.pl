@@ -26,6 +26,7 @@ exit(0);
 sub main {
 	if ($ARGC == 0) { #optionが無い場合は usage 出力
 		&usage();
+		return;
 	}
 
 	# make
@@ -232,10 +233,17 @@ sub code_output {
 	my @short = ();
 	my $count = 0;
 	foreach my $line (@source) {
-		$line =~ s/(?<!\$)#.*$|\t|\n//g;
+		$line =~ s/(?<!\$)#.*$|\t//g;
+		if ($ARGV[0] !~ /l/) {
+			$line =~ s/\n//g;
+		}
 		if (length $line == 0) {
 			next;
 		}
+
+		# use strict/warnings の削除
+		$line =~ s/use strict; *\n//;
+		$line =~ s/use warnings; *\n//;
 
 		$short[$count] = $line;
 		$count++;
