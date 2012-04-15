@@ -233,9 +233,9 @@ sub code_output {
 	my @short = ();
 	my $count = 0;
 	foreach my $line (@source) {
-		$line =~ s/(?<!\$)#.*$|\t//g;
-		if ($ARGV[0] !~ /l/) {
-			$line =~ s/\n//g;
+		$line =~ s/(?<!\$)#.*$//g;
+		if ($ARGV[0] !~ /l/ || $ARGV[0] =~ /all/) {
+			$line =~ s/\t|\n//g;
 		}
 		if (length $line == 0) {
 			next;
